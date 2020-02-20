@@ -1,17 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace Lab2
 {
+    [Serializable]
     public class Truck : Transport
     {
-        protected string Brand { get; set; }
-        protected string Number { get; set; }
-        protected float Speed { get; set; }
-        protected double LoadCapacity { get; set; }
-        protected bool TruckTrailer { get; set; }
+        [XmlAttribute]
+        public string Brand { get; set; }
+        public string Number { get; set; }
+        public float Speed { get; set; }
+        public double LoadCapacity { get; set; }
+        public bool TruckTrailer { get; set; }
 
+        /// <summary>
+        /// Конструктор
+        /// </summary>
         public Truck(string brand, string number, float speed, bool trucktrailer, double loadcapacity)
         {
             Brand = brand;
@@ -21,6 +28,8 @@ namespace Lab2
             LoadCapacity = loadcapacity;
         }
 
+        public Truck() { }
+
         public override void PrintInfo()
         {
 
@@ -29,11 +38,13 @@ namespace Lab2
             Console.WriteLine("Speed: " + this.Speed);
             Console.WriteLine("TruckTrailer: " + this.TruckTrailer);
             Console.WriteLine("Capacity: " + this.CalcLoadCapacity());
+            Trace.WriteLine("Truck info has been displayed");
 
         }
 
         public override double CalcLoadCapacity()
         {
+            Trace.WriteLine("Characteristic has been calculated");
             if (TruckTrailer) return this.LoadCapacity * 2;
             else return this.LoadCapacity;
         }

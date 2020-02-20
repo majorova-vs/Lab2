@@ -1,16 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace Lab2
 {
+    [Serializable]
     public class Motorcycle : Transport
     {
-        protected string Brand { get; set; }
-        protected string Number { get; set; }
-        protected float Speed { get; set; }
-        protected double LoadCapacity { get; set; }
-        bool IsSidecar { get; set; }
+        [XmlAttribute]
+        public string Brand { get; set; }
+        public string Number { get; set; }
+        public float Speed { get; set; }
+        public double LoadCapacity { get; set; }
+        public bool IsSidecar { get; set; }
+
+        /// <summary>
+        /// Конструктор
+        /// </summary>
         public Motorcycle(string brand, string number, float speed, bool issidecar, double loadcapacity)
         {
             Brand = brand;
@@ -19,7 +27,7 @@ namespace Lab2
             IsSidecar = issidecar;
             LoadCapacity = loadcapacity;
         }
-
+        public Motorcycle() { }
 
         public override void PrintInfo()
         {
@@ -28,10 +36,12 @@ namespace Lab2
             Console.WriteLine("Speed: " + this.Speed);
             Console.WriteLine("IsSidecar: " + this.IsSidecar);
             Console.WriteLine("Capacity: " + this.CalcLoadCapacity());
+            Trace.WriteLine("Motorcycle info has been displayed");
         }
 
         public override double CalcLoadCapacity()
         {
+            Trace.WriteLine("Characteristic has been calculated");
             if (this.IsSidecar) return this.LoadCapacity;
             else return 0;
         }
