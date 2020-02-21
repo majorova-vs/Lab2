@@ -27,6 +27,9 @@ namespace Lab2
             }
 
 
+
+
+
         }
 
         /// <summary>
